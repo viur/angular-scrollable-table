@@ -1,12 +1,12 @@
 .scrollableContainer {
-    height: 310px;
+
     position: relative;
     padding-top: 35px;
     overflow: hidden;
 }
 .scrollableContainer .headerSpacer {
-    border: 1px solid #d5d5d5;
-    border-bottom-color: #bbb;
+
+
     position: absolute;
     height: 36px;
     top: 0;
@@ -21,10 +21,8 @@
 }
 .scrollableContainer th .orderWrapper .order {
     font-size: 8pt;
-    color: #BDBDBD;
 }
 .scrollableContainer th .orderWrapper .active {
-    color: #464646;
 }
 
 .scrollArea {
@@ -107,7 +105,6 @@
     top: 0px;
     width: 2px;
     height: 100%;
-    background-color: #CFCFCF;
 }
 
 .scrollableContainer th .resize-rod {

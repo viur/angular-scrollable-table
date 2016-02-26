@@ -7,9 +7,10 @@
         restrict: 'E',
         scope: {
           rows: '=watch',
-          sortFn: '='
+          sortFn: '=',
+          height: '='
         },
-        template: '<div class="scrollableContainer">' +
+        template: '<div class="scrollableContainer" ng-style="{\'height\':height}">' +
                     '<div class="headerSpacer"></div>' +
                     '<div class="scrollArea" ng-transclude></div>' +
                   '</div>',
