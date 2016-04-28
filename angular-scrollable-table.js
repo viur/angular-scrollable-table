@@ -67,16 +67,24 @@
           };
 
           function defaultCompare(row1, row2) {
-            var exprParts = $scope.sortExpr.match(/(.+)\s+as\s+(.+)/);
-            var scope = {};
-            scope[exprParts[1]] = row1;
-            var x = $parse(exprParts[2])(scope);
 
-            scope[exprParts[1]] = row2;
-            var y = $parse(exprParts[2])(scope);
+            var x =row1[$scope.sortExpr];
+            var y = row2[$scope.sortExpr];
 
             if (x === y) return 0;
-            return x > y ? 1 : -1;
+
+            if(!isNaN(Date.parse(x)) && !isNaN(Date.parse(y))) {
+              return Date.parse(x) > Date.parse(y) ? 1 : -1;
+            }
+            
+            if(isNaN(x) && isNaN(y)) {
+             return x.localeCompare(y);
+            }
+
+            if(!isNaN(x) && !isNaN(y)) {
+              return x > y ? 1 : -1;
+             
+            }
           }
 
           function scrollToRow(row) {
@@ -207,14 +215,14 @@
               '<div class="title" ng-transclude></div>' +
               '<span class="orderWrapper">' +
                 '<span class="order" ng-show="focused || isActive()" ng-click="toggleSort($event)" ng-class="{active:isActive()}">' +
-                  '<i ng-show="isAscending()" class="glyphicon glyphicon-chevron-up"></i>' +
-                  '<i ng-show="!isAscending()" class="glyphicon glyphicon-chevron-down"></i>' +
+                  '<i ng-show="isAscending()" class="fa fa-chevron-up"></i>' +
+                  '<i ng-show="!isAscending()" class="fa fa-chevron-down"></i>' +
                 '</span>' +
               '</span>' +
             '</div>' +
           '</div>',
         link: function (scope, elm, attrs, tableController) {
-          var expr = attrs.on || "a as a." + attrs.col;
+          var expr = attrs.on ||  attrs.col;
           scope.element = angular.element(elm);
           scope.isActive = function () {
             return tableController.getSortExpr() === expr;
