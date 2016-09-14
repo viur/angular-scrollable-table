@@ -44,6 +44,8 @@
                 return $scope.asc ? compared : compared * -1;
               });
             }
+            //when using pagination it is important to render again to align headers
+            $scope.$broadcast('renderScrollableTable');
           };
 
           this.renderTalble = function (){
@@ -78,14 +80,14 @@
             if(!isNaN(Date.parse(x)) && !isNaN(Date.parse(y))) {
               return Date.parse(x) > Date.parse(y) ? 1 : -1;
             }
-            
+
             if(isNaN(x) && isNaN(y)) {
              return x.localeCompare(y);
             }
 
             if(!isNaN(x) && !isNaN(y)) {
               return x > y ? 1 : -1;
-             
+
             }
           }
 
