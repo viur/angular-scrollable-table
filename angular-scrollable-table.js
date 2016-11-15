@@ -72,23 +72,11 @@
 
           function defaultCompare(row1, row2) {
 
-            var x =row1[$scope.sortExpr];
+            var x = row1[$scope.sortExpr];
             var y = row2[$scope.sortExpr];
 
             if (x === y) return 0;
-
-            if(!isNaN(Date.parse(x)) && !isNaN(Date.parse(y))) {
-              return Date.parse(x) > Date.parse(y) ? 1 : -1;
-            }
-
-            if(isNaN(x) && isNaN(y)) {
-             return x.localeCompare(y);
-            }
-
-            if(!isNaN(x) && !isNaN(y)) {
-              return x > y ? 1 : -1;
-
-            }
+            return x > y ? 1 : -1;
           }
 
           function scrollToRow(row) {
