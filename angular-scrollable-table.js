@@ -15,7 +15,7 @@
                 '<div class="headerSpacer"></div>' +
                 '<div class="scrollArea" ng-transclude></div>' +
                 '</div>',
-                controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
+                controller: ['$scope', '$element', '$attrs', '$rootScope', function ($scope, $element, $attrs, $rootScope) {
 
                     var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
@@ -108,6 +108,7 @@
                             if ($element.find("table:visible").length === 0) {
                                 $timeout(wait, 100);
                             } else {
+                                $rootScope.$broadcast('renderFinish');
                                 deferredRender.resolve();
                             }
                         }
